@@ -1,15 +1,14 @@
-package com.example.weatherapp
+package com.example.myweatherapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.example.weatherapp.databinding.ActivityMainBinding
-import com.example.weatherapp.viewmodel.WeatherViewModel
+import com.example.myweatherapp.databinding.ActivityMainBinding
+import com.example.myweatherapp.viewmodel.WeatherViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -33,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.cityEditText.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE ||
-                (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER)) {
+                (event != null && event.keyCode == KeyEvent.KEYCODE_ENTER)
+            ) {
                 searchWeather()
                 true
             } else {
@@ -52,11 +52,27 @@ class MainActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.weatherData.observe(this) { weatherData ->
             binding.cityNameTextView.text = weatherData.name
-            binding.temperatureTextView.text = "${weatherData.main.temp.toInt()}°C"
-            binding.weatherDescriptionTextView.text = weatherData.weather[0].description.capitalize()
-            binding.feelsLikeTextView.text = "Feels like: ${weatherData.main.feels_like.toInt()}°C"
-            binding.humidityTextView.text = "Humidity: ${weatherData.main.humidity}%"
-            binding.windTextView.text = "Wind: ${weatherData.wind.speed} m/s"
+            binding.temperatureTextView.text = buildString {
+                append(weatherData.main.temp.toInt())
+                append("°C")
+            }
+            binding.weatherDescriptionTextView.text =
+                weatherData.weather[0].description.capitalize()
+            binding.feelsLikeTextView.text = buildString {
+                append("Feels like: ")
+                append(weatherData.main.feels_like.toInt())
+                append("°C")
+            }
+            binding.humidityTextView.text = buildString {
+                append("Humidity: ")
+                append(weatherData.main.humidity)
+                append("%")
+            }
+            binding.windTextView.text = buildString {
+                append("Wind: ")
+                append(weatherData.wind.speed)
+                append(" m/s")
+            }
 
             // Load weather icon
             val iconCode = weatherData.weather[0].icon
