@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -35,13 +36,13 @@ android {
     }
     buildFeatures {
         viewBinding = true
-
         dataBinding = true
     }
 }
 
 dependencies {
 
+    kapt(libs.androidx.databinding.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -50,23 +51,22 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.android.databinding:viewbinding:8.8.1")
-    implementation ("androidx.activity:activity-ktx:1.8.1")
+    implementation(libs.viewbinding)
+    implementation (libs.androidx.activity.ktx)
 
 
 
 
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
 
     // Lifecycle components
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation (libs.androidx.lifecycle.viewmodel.ktx)
+    implementation (libs.androidx.lifecycle.runtime.ktx)
 
     // Coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation (libs.kotlinx.coroutines.android)
 
     // Image loading
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-
+    implementation (libs.glide)
 }

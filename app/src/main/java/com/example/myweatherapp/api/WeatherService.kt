@@ -1,4 +1,4 @@
-package com.example.weatherapp.api
+package com.example.myweatherapp.api
 
 import com.example.weatherapp.model.WeatherResponse
 import retrofit2.Response

@@ -1,6 +1,6 @@
-package com.example.weatherapp.repository
+package com.example.myweatherapp.repository
 
-import com.example.weatherapp.api.RetrofitInstance
+import com.example.myweatherapp.api.RetrofitInstance
 import com.example.weatherapp.model.WeatherResponse
 import retrofit2.Response
 
